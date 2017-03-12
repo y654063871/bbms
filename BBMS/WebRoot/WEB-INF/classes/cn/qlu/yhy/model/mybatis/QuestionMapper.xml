@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.augmentum.model.Question">
+
+    <resultMap type="Question" id="questionMap">
+        <id column="id" property="id"/>
+        <result column="question" property="question"/>
+        <result column="question_id" property="questionId"/>
+        <result column="answer_a" property="answerA"/>
+        <result column="answer_b" property="answerB"/>
+        <result column="answer_c" property="answerC"/>
+        <result column="answer_d" property="answerD"/>
+        <result column="answer_true" property="answerTrue"/>
+    </resultMap>
+
+    <select id="getTotalPageCount" resultType="int">
+        <![CDATA[
+            SELECT COUNT(id) FROM question
+        ]]>
+    </select>
+    
+    <select id="getTotalPageCountByName" parameterType="String" resultType="int">
+        <![CDATA[
+            SELECT COUNT(id) FROM question WHERE question LIKE #{questionName}
+        ]]>
+    </select>
+    
+     <select id="findQuestions" parameterType="Page" resultMap="questionMap">
+        <![CDATA[
+            SELECT id, question_id, question, answer_a, answer_b, answer_c, answer_d, answer_true
+            FROM question
+        ]]>
+        <choose>
+          <when test="sequence == 'desc'">
+            ORDER BY question_id DESC
+          </when>
+          <otherwise>
+            ORDER BY question_id
+          </otherwise>
+        </choose>
+         LIMIT #{startRecord}, #{pageSize}
+    </select>
+
+    <select id="findQuestionsByName" resultMap="questionMap">
+        <![CDATA[
+            SELECT id, question_id, question, answer_a, answer_b, answer_c, answer_d, answer_true 
+            FROM question 
+            WHERE question LIKE #{questionName} 
+            ORDER BY question_id DESC limit #{page.startRecord}, #{page.pageSize}
+        ]]>
+    </select>
+
+    <select id="getQuestionById" parameterType="String" resultMap="questionMap">
+        <![CDATA[
+            SELECT id, question_id, question, answer_a,answer_b, answer_c, answer_d, answer_true 
+            FROM question 
+            WHERE question_id = #{questionId}
+        ]]>
+    </select>
+
+    <select id="getQuestionByName" parameterType="String" resultMap="questionMap">
+        <![CDATA[
+            SELECT id, question_id, question, answer_a,answer_b, answer_c, answer_d, answer_true 
+            FROM question 
+            WHERE question = #{questionName}
+        ]]>
+    </select>
+
+    <insert id="createQuestion" parameterType="Question" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO question(question, answer_a, answer_b, answer_c, answer_d, answer_true) 
+            VALUES(#{question}, #{answerA}, #{answerB}, #{answerC}, #{answerD}, #{answerTrue})
+        ]]>
+    </insert>
+
+    <delete id="deleteQuestion" parameterType="String">
+        <![CDATA[
+            DELETE from question WHERE question_id = #{questionId}
+        ]]>
+    </delete>
+    
+    <update id="updateQuestion" parameterType="Question">
+        <![CDATA[
+            UPDATE question SET question = #{question}, answer_a = #{answerA}, answer_b = #{answerB}, answer_c = #{answerC}, answer_d = #{answerD}, answer_true = #{answerTrue} 
+            WHERE question_id = #{questionId}
+        ]]>
+    </update>
+    
+    <update id="updateQuestionId">
+        <![CDATA[
+            UPDATE question 
+            SET question_id = #{questionId} 
+            WHERE id = #{id}
+        ]]>
+    </update>
+    
+     <!-- 
+    <select id="getTotalPageCount" parameterType="Page" resultMap="questionMap">
+        <![CDATA[
+            SELECT * FROM question
+        ]]>
+        <where>
+          <choose>
+            <when test="sequence == 'desc'">
+              
+            </when>
+            <when test="">
+            
+            </when>
+            <otherwise>
+            
+            </otherwise>
+          </choose>
+        
+        </where>
+        LIMIT #{}, #{}
+    </select>
+     -->
+</mapper>

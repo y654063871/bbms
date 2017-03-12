@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.augmentum.model.Exam">
+
+    <resultMap type="Exam" id="examMap">
+        <id column="id" property="id"/>
+        <result column="exam_id" property="examId"/>
+        <result column="exam_name" property="examName"/>
+        <result column="description" property="description"/>
+        <result column="effective_time" property="effectiveTime"/>
+        <result column="duration" property="duration"/>
+        <result column="question_quantity" property="questionQuantity"/>
+        <result column="single_question_score" property="singleQuestionScore"/>
+        <result column="total_score" property="totalScore"/>
+        <result column="pass_criteria" property="passCriteria"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="findExams" resultMap="examMap">
+        <![CDATA[
+            SELECT exam_id, exam_name, description, effective_time, duration, question_quantity, single_question_score, total_score, pass_criteria, create_time  
+            FROM exam
+        ]]>
+    </select>
+    
+    <select id="findRandomQuestion" parameterType="int" resultMap="com.augmentum.model.Question.questionMap">
+        <![CDATA[
+            SELECT id, question, question_id, answer_a, answer_b, answer_c, answer_d, answer_true FROM question ORDER BY RAND() LIMIT #{quantity}
+        ]]>
+    </select>
+    
+    
+    <insert id="createExam" parameterType="Exam" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO exam(exam_name, description, effective_time, duration, question_quantity, single_question_score, total_score, pass_criteria, create_time) 
+            VALUES(#{examName}, #{description}, #{effectiveTime}, #{duration}, #{questionQuantity}, #{singleQuestionScore}, #{totalScore}, #{passCriteria}, NOW())
+        ]]>
+    </insert>
+    
+    <insert id="insertQuestion2CopyQuestion" parameterType="Question" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO copy_question(question, question_id, answer_a, answer_b, answer_c, answer_d, answer_true) 
+            VALUES(#{question}, #{questionId},#{answerA}, #{answerB}, #{answerC}, #{answerD}, #{answerTrue})
+        ]]>
+    </insert>
+    
+    <insert id="insertQuestion2Exam" parameterType="map">
+        <![CDATA[
+            INSERT INTO exam_question (exam_id, question_id) 
+            VALUES(#{examId}, #{questionId})
+        ]]>
+    </insert>
+    
+    <update id="updateExamId">
+        <![CDATA[
+            UPDATE exam 
+            SET exam_id = #{examId} 
+            WHERE id = #{id}
+        ]]>
+    </update>
+
+</mapper>

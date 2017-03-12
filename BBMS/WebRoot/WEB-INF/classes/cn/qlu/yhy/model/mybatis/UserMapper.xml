@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qlu.yhy.model.User">
+
+    <resultMap type="User" id="baseUserResultMap">
+        <id column="id" property="id" jdbcType="LONGVARCHAR" />
+        <result column="username" jdbcType="LONGVARCHAR" property="username" />
+        <result column="age" jdbcType="LONGVARCHAR" property="age"  />
+        <result column="sex" jdbcType="LONGVARCHAR" property="sex" />
+        <result column="role" jdbcType="LONGVARCHAR" property="role" />
+        <result column="credit_score" jdbcType="LONGVARCHAR" property="creditScore" />
+    </resultMap>
+    
+    <resultMap id="allUserResultMap" type="User" extends="baseUserResultMap">
+        <result column="password" jdbcType="LONGVARCHAR" property="job" />
+        <result column="email" jdbcType="LONGVARCHAR" property="resume" />
+        <result column="birthday" jdbcType="LONGVARCHAR" property="job" />
+        <result column="telephone" jdbcType="LONGVARCHAR" property="resume" />
+        <result column="address" jdbcType="LONGVARCHAR" property="job" />
+        <result column="money_score" jdbcType="LONGVARCHAR" property="resume" />
+        <result column="money_score" jdbcType="LONGVARCHAR" property="job" />
+        <result column="last_login_date" jdbcType="LONGVARCHAR" property="resume" />
+    </resultMap>
+
+    <select id="getUserByNameAndPassword" resultMap="baseUserResultMap">
+        <![CDATA[
+            SELECT 
+                id, 
+                username, 
+                age, 
+                sex, 
+                role, 
+                credit_score 
+            FROM 
+                user 
+            WHERE 
+                username = #{userName}
+                and
+                password = #{password}
+        ]]>
+    </select>
+
+    <select id="getUserByName" parameterType="String" resultMap="userMap">
+        <![CDATA[
+            SELECT id, user_name, password FROM login WHERE user_name = LOWER(#{userName})
+        ]]>
+    </select>
+
+</mapper>

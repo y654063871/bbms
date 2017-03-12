@@ -1,0 +1,33 @@
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL auto_increment,
+  `username` varchar(16) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `age` char(2) NOT NULL,
+  `sex` int(1) NOT NULL,
+  `email` varchar(56) NOT NULL,
+  `birthday` datetime default NULL,
+  `telephone` varchar(11) NOT NULL,
+  `address` varchar(256) NOT NULL,
+  `role` int(11) NOT NULL,
+  `credit_score` int(11) NOT NULL,
+  `money_score` int(11) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_login_date` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `user_role` (`role`),
+  CONSTRAINT `user_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+credit_score 信誉积分  
+ 对于某些珍贵的书籍可以设定达到信誉积分的用户才可以借阅，用户拥有一定的初始信誉，对于逾期或不还的扣除相应积分，如果过低将限制登录系统
+
+money_score 借阅积分
+ 对于某些珍贵的书籍可以设置借阅积分，借阅该书时需要消耗该积分，积分不足时不可以借阅该书， 图书借出时根据时长获取相应的借阅积分
+
+create table role(
+    id int primary key auto_increment,
+    role_name varchar(20)
+);
+
+ 

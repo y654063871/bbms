@@ -1,0 +1,161 @@
+body{
+	width: 1280px;
+	height: 760px;
+	background: no-repeat url(../img/bcak1.jpg);
+	background-position: bottom;
+}
+
+
+/* --------------The head part-------------- */
+#head_left{
+	width: 200px;
+	height: 760px;
+	background-color: #818181;
+	opacity: 0.4;
+	/*background-color: blue;*/
+	margin: 0;
+	padding-top: 50px;
+	float: left;
+}
+
+/* About system logo and logo font div */
+#logo_book{
+	height: 50px;
+	line-height: 50px;
+	font-size: 24px;
+	font-family: "楷体";
+	color: #B2BCD7;
+	/*background-color: white;*/
+	padding-left: 20px;
+	padding-right: 30px;
+	cursor: pointer;
+}
+
+/* System logo picture */
+#logo_book_img{
+	width: 50px;
+	height: 50px;
+}
+
+/* System logo font */
+#logo_book_font{
+	float: right;
+}
+
+/* About user head picture and user name part */
+#head_user{
+	padding-top: 20px;
+}
+
+/* About user head picture div */
+#head_user_pic_div{
+	
+}
+
+/* About user head picture */
+#head_user_pic_img{
+	padding-left: 75px;
+	height: 50px;
+	width: 50px;
+	cursor: pointer;
+}
+
+/* About user head picture hover event */
+#head_user_pic_img:hover{
+	padding-left: 70px;
+	height: 60px;
+	width: 60px;
+}
+
+/* About user name div */
+#head_user_name_div{
+	margin-top: 10px;
+	text-align: center;
+}
+
+/* About user name font */
+#head_user_name_font{
+	cursor: pointer;
+}
+
+/* About user name font hover event*/
+#head_user_name_font:hover{
+	font-size: 20px;
+}
+
+/* About head choice button common style */
+.head_href{
+	height: 50px;
+	width: 200px;
+	/*background-color: white;*/
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 20px;
+	font-size: 22px;
+    font-family: "楷体";
+    color: white;
+}
+
+/* Choice button hover */
+.head_href:hover{
+    box-shadow: 0px 0px 20px #E7E7E7;
+    background-color: #B3B3B3;
+    color: #46FFFF;
+}
+
+/* About my book button div */
+#head_mybook{
+	margin-top: 20px;
+}
+
+/* About community book button div */
+#head_communitybook{
+	
+}
+
+/* About private book button div */
+#head_privatebook{
+	
+}
+
+/* About select book button div */
+#head_findbook{
+	
+}
+
+/* -----------------head part end---------------- */
+
+
+/* --------------right body part ---------------- */
+
+#right_all{
+	float: left;
+	width: 1080px;
+	height: 100%;
+	/*background-color: white;*/
+}
+	
+#right_body{
+	/*margin-left: 50px;*/
+	text-align: center;
+	margin: 0 auto;
+	width: 1100px;
+	height: 670px;
+	opacity: 0.6;
+	background-color: #818181;
+	float: left;
+	margin-left: 20px;
+	margin-top: 20px;
+	border-radius: 3px;
+}
+
+#right_body_show_message{
+	width: 1000px;
+	height: 300px;
+	margin-left: 50px;
+	margin-top: 20px;
+	background-color: white;
+}
+
+
